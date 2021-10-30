@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Chop.Controller.HomeCustomerController">
+   <children>
+      <ImageView fitHeight="928.0" fitWidth="919.0" layoutX="-10.0" layoutY="-209.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/IMG_2346-2-1-768x768.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="961.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/peach-orange-solid-color-by-delynn-addams-for-interior-home-decor-delynn-addams.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="33.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/3080866.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="55.0" layoutY="-5.0" prefHeight="62.0" prefWidth="118.0" text="Drink Tea" textFill="WHITE">
+         <font>
+            <Font name="Berlin Sans FB" size="27.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="393.0" fitWidth="396.0" layoutX="467.0" layoutY="117.0" opacity="0.76" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/5338051-white-background-images-scaled.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="menu_label" layoutX="501.0" layoutY="280.0" prefHeight="33.0" prefWidth="324.0">
+         <font>
+            <Font name="Berlin Sans FB" size="20.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="size_combobox" layoutX="545.0" layoutY="340.0" prefHeight="26.0" prefWidth="92.0" />
+      <Spinner fx:id="int_spinner" layoutX="686.0" layoutY="340.0" prefHeight="26.0" prefWidth="92.0" />
+      <Label fx:id="price_label" layoutX="686.0" layoutY="389.0" prefHeight="34.0" prefWidth="152.0" textFill="#332113">
+         <font>
+            <Font name="Berlin Sans FB" size="20.0" />
+         </font>
+      </Label>
+      <Button layoutX="612.0" layoutY="443.0" mnemonicParsing="false" onAction="#addAction" prefHeight="34.0" prefWidth="102.0" text="เพิ่มลงตะกร้า" textFill="#df6f1f">
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="843.0" layoutY="13.0" mnemonicParsing="false" onAction="#logoutAction" prefHeight="26.0" prefWidth="33.0">
+         <graphic>
+            <ImageView fitHeight="26.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/152532.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets right="5.0" top="1.0" />
+         </padding>
+      </Button>
+      <TableView fx:id="table" layoutX="51.0" layoutY="88.0" prefHeight="454.0" prefWidth="366.0">
+        <columns>
+          <TableColumn fx:id="menu" prefWidth="222.39999389648438" text="Menu" />
+          <TableColumn prefWidth="92.80001831054688" text="C2" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

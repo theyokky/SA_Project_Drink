@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Chop.Controller.HomeController">
+   <children>
+      <ImageView fitHeight="928.0" fitWidth="919.0" layoutX="-10.0" layoutY="-209.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/IMG_2346-2-1-768x768.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="961.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/peach-orange-solid-color-by-delynn-addams-for-interior-home-decor-delynn-addams.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="33.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/3080866.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="475.0" fitWidth="543.0" layoutX="362.0" layoutY="90.0" opacity="0.76" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/5338051-white-background-images-scaled.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="55.0" layoutY="-5.0" prefHeight="62.0" prefWidth="118.0" text="Drink Tea" textFill="WHITE">
+         <font>
+            <Font name="Berlin Sans FB" size="27.0" />
+         </font>
+      </Label>
+      <TextField fx:id="user_textfield" layoutX="541.0" layoutY="195.0" prefHeight="26.0" prefWidth="158.0" />
+      <Label layoutX="445.0" layoutY="188.0" prefHeight="40.0" prefWidth="70.0" text="Username" textFill="#ff994b">
+         <font>
+            <Font name="Berlin Sans FB" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="448.0" layoutY="257.0" prefHeight="40.0" prefWidth="64.0" text="Password" textFill="#ff994b">
+         <font>
+            <Font name="Berlin Sans FB" size="16.0" />
+         </font>
+      </Label>
+      <Button layoutX="580.0" layoutY="348.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="33.0" prefWidth="70.0" text="Log in" textFill="#ff9341">
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="728.0" layoutY="496.0" mnemonicParsing="false" onAction="#registerAction" prefHeight="33.0" prefWidth="70.0" text="Register" textFill="#ea873b">
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+      </Button>
+      <Label layoutX="607.0" layoutY="503.0" prefHeight="26.0" prefWidth="111.0" text="Don't have account ?" textFill="#665e55">
+         <font>
+            <Font name="Berlin Sans FB" size="12.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="pass_passwordfield" layoutX="542.0" layoutY="265.0" prefHeight="26.0" prefWidth="158.0" />
+      <Label fx:id="user_label" layoutX="548.0" layoutY="232.0" prefHeight="18.0" prefWidth="216.0" textFill="#dc1d1d">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="user_label1" layoutX="548.0" layoutY="300.0" prefHeight="18.0" prefWidth="216.0" textFill="#dc1d1d">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
