@@ -2,16 +2,15 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Chop.Controller.HomeCustomerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Chop.Controller.HomeStaffController">
    <children>
       <ImageView fitHeight="928.0" fitWidth="919.0" layoutX="-10.0" layoutY="-209.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -43,14 +42,7 @@
             <Font name="Berlin Sans FB" size="20.0" />
          </font>
       </Label>
-      <ComboBox fx:id="size_combobox" layoutX="545.0" layoutY="340.0" prefHeight="26.0" prefWidth="92.0" />
-      <Spinner fx:id="int_spinner" layoutX="686.0" layoutY="340.0" prefHeight="26.0" prefWidth="92.0" />
-      <Label fx:id="price_label" layoutX="686.0" layoutY="389.0" prefHeight="34.0" prefWidth="152.0" textFill="#332113">
-         <font>
-            <Font name="Berlin Sans FB" size="20.0" />
-         </font>
-      </Label>
-      <Button layoutX="612.0" layoutY="443.0" mnemonicParsing="false" onAction="#addAction" prefHeight="34.0" prefWidth="102.0" text="เพิ่มลงตะกร้า" textFill="#df6f1f">
+      <Button layoutX="729.0" layoutY="339.0" mnemonicParsing="false" onAction="#editAction" prefHeight="26.0" prefWidth="62.0" text="แก้ไข" textFill="#df6f1f">
          <font>
             <Font name="Berlin Sans FB" size="15.0" />
          </font>
@@ -68,17 +60,21 @@
          </padding>
       </Button>
       <TableView fx:id="table" layoutX="51.0" layoutY="88.0" prefHeight="454.0" prefWidth="366.0" />
-      <Button layoutX="785.0" layoutY="13.0" mnemonicParsing="false" onAction="#cartAction" prefHeight="26.0" prefWidth="33.0">
-         <graphic>
-            <ImageView fitHeight="26.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/263142.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <padding>
-            <Insets right="5.0" top="1.0" />
-         </padding>
+      <Button layoutX="753.0" layoutY="445.0" mnemonicParsing="false" onAction="#addAction" prefHeight="34.0" prefWidth="89.0" text="เพิ่มเมนูใหม่" textFill="#df6f1f">
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+      </Button>
+      <TextField fx:id="price_textfield" layoutX="615.0" layoutY="340.0" prefHeight="26.0" prefWidth="96.0" />
+      <Label layoutX="537.0" layoutY="342.0" prefHeight="22.0" prefWidth="70.0" text="ราคาเริ่มต้น" textFill="#df6f1f">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Button layoutX="625.0" layoutY="397.0" mnemonicParsing="false" onAction="#deleteAction" prefHeight="34.0" prefWidth="78.0" text="ลบเมนูนี้" textFill="#df6f1f">
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
       </Button>
    </children>
 </AnchorPane>

@@ -5,7 +5,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -68,11 +67,18 @@
             <Insets right="5.0" top="1.0" />
          </padding>
       </Button>
-      <TableView fx:id="table" layoutX="51.0" layoutY="88.0" prefHeight="454.0" prefWidth="366.0">
-        <columns>
-          <TableColumn fx:id="menu" prefWidth="222.39999389648438" text="Menu" />
-          <TableColumn prefWidth="92.80001831054688" text="C2" />
-        </columns>
-      </TableView>
+      <TableView fx:id="table" layoutX="51.0" layoutY="88.0" prefHeight="454.0" prefWidth="366.0" />
+      <Button layoutX="785.0" layoutY="13.0" mnemonicParsing="false" onAction="#cartAction" prefHeight="26.0" prefWidth="33.0">
+         <graphic>
+            <ImageView fitHeight="26.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/263142.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets right="5.0" top="1.0" />
+         </padding>
+      </Button>
    </children>
 </AnchorPane>

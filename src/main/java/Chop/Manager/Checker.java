@@ -75,56 +75,13 @@ public class Checker {
             return false;
         }
     }
-    public boolean checkAboutAllRoom(String room){
-        if (!room.equals("null")){
-            return true;
-        }
-        return false;
-    }
 
-    public boolean checkID(String id){
+    public boolean checkPrice(String price){
         int ascii;
         int flag = 0;
-        if (id.length() == 5){
-            for (int i=0 ; i<id.length() ; i++){
-                ascii = (int) id.charAt(i);
-                if (!(ascii >= 48 && ascii <=57 )){
-                    flag = 1;
-                    break;
-                }
-            }
-        }
-        else{
-            flag = 1;
-        }
-        if (flag == 1){
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
-    public String checkPriority(String priority){
-        if (!priority.equals("null")){
-            if (priority.equals("ทั่วไป")){
-                priority = "0";
-            }
-            else if (priority.equals("ส่วนบุคคล")){
-                priority = "1";
-            }
-            else if (priority.equals("ลับมาก")){
-                priority = "2";
-            }
-            return priority;
-        }
-        return "";
-    }
-    public boolean checkTrackingNumber(String tracking_number) {
-        int ascii;
-        int flag = 0;
-        if (tracking_number.length() >= 5){
-            for (int i=0 ; i<tracking_number.length() ; i++){
-                ascii = (int) tracking_number.charAt(i);
+        if (price.length() > 0){
+            for (int i=0 ; i<price.length() ; i++){
+                ascii = (int) price.charAt(i);
                 if (!(ascii >= 48 && ascii <=57 )){
                     flag = 1;
                     break;
@@ -142,5 +99,6 @@ public class Checker {
             return true;
         }
     }
+
 }
 

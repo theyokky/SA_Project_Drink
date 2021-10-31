@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Chop.Controller.CartController">
+   <children>
+      <ImageView fitHeight="928.0" fitWidth="919.0" layoutX="-10.0" layoutY="-209.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/IMG_2346-2-1-768x768.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="961.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/peach-orange-solid-color-by-delynn-addams-for-interior-home-decor-delynn-addams.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="33.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/3080866.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="55.0" layoutY="-5.0" prefHeight="62.0" prefWidth="118.0" text="Drink Tea" textFill="WHITE">
+         <font>
+            <Font name="Berlin Sans FB" size="27.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="416.0" fitWidth="414.0" layoutX="463.0" layoutY="116.0" opacity="0.76" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/5338051-white-background-images-scaled.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="menu_label" layoutX="508.0" layoutY="283.0" prefHeight="33.0" prefWidth="324.0">
+         <font>
+            <Font name="Berlin Sans FB" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="price_label" layoutX="674.0" layoutY="387.0" prefHeight="34.0" prefWidth="152.0" textFill="#332113">
+         <font>
+            <Font name="Berlin Sans FB" size="20.0" />
+         </font>
+      </Label>
+      <Button layoutX="619.0" layoutY="440.0" mnemonicParsing="false" onAction="#payAction" prefHeight="34.0" prefWidth="102.0" text="ชำระเงิน" textFill="#df6f1f">
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="619.0" layoutY="336.0" mnemonicParsing="false" onAction="#deleteAction" prefHeight="33.0" prefWidth="102.0" text="ลบสินค้าออก" textFill="#df6f1f">
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="770.0" layoutY="474.0" mnemonicParsing="false" onAction="#backAction" prefHeight="33.0" prefWidth="80.0" text="ย้อนกลับ" textFill="#df6f1f">
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+      </Button>
+      <TableView fx:id="table" layoutX="33.0" layoutY="88.0" prefHeight="454.0" prefWidth="403.0" />
+   </children>
+</AnchorPane>

@@ -11,17 +11,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import java.io.IOException;
-import java.util.ArrayList;
 
-public class HomeCustomerController {
+import java.io.IOException;
+
+public class HomeStaffController {
     @FXML TableView table = new TableView();
     @FXML Label menu_label;
-    @FXML Label price_label;
-    @FXML Spinner<Integer> int_spinner;
-    @FXML ComboBox size_combobox;
-    String[] s;
-    private Product selectedProduct;
+    @FXML TextField price_textfield;
 
     private final ObservableList<Product> data =
             FXCollections.observableArrayList(
@@ -44,36 +40,16 @@ public class HomeCustomerController {
         });
     }
 
-
     private void showSelectedItem(Product product){
-        size_combobox.getItems().clear();
-        selectedProduct = product;
-        s = product.getSize().split(",");
-        // spinner
-        SpinnerValueFactory<Integer> valueFactory =
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 40, 1);
-        int_spinner.setValueFactory(valueFactory);
 
         menu_label.setText(product.getName());
-        price_label.setText("ราคารวม : " + 0);
-
-        size_combobox.getItems().addAll(s);
 
 //        imageView.setImage(new Image(product.getImagePath()));
     }
 
     @FXML public void addAction(ActionEvent event) throws IOException {
-        Object size = size_combobox.getValue();
-        String size_string = String.valueOf(size);
-
-        System.out.println(int_spinner.getValue());
-        System.out.println(size_string);
-
-    }
-
-    @FXML public void cartAction(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/Cart.fxml"));
+        loader.setLocation(getClass().getResource("/AddMenu.fxml"));
         Scene scene = new Scene(loader.load());
 
         Button b = (Button) event.getSource();
@@ -82,6 +58,17 @@ public class HomeCustomerController {
         stage.setTitle("DrinkTea");
         stage.setScene(scene);
         stage.show();
+
+    }
+
+    @FXML public void editAction()  {
+
+
+    }
+
+    @FXML public void deleteAction()  {
+
+
     }
 
     @FXML public void logoutAction(ActionEvent event) throws IOException {
@@ -96,5 +83,4 @@ public class HomeCustomerController {
         stage.setScene(scene);
         stage.show();
     }
-
 }

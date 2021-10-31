@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Chop.Controller.AddMenuController">
+   <children>
+      <ImageView fitHeight="928.0" fitWidth="919.0" layoutX="-10.0" layoutY="-209.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/IMG_2346-2-1-768x768.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="961.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/peach-orange-solid-color-by-delynn-addams-for-interior-home-decor-delynn-addams.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="33.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/3080866.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="55.0" layoutY="-5.0" prefHeight="62.0" prefWidth="118.0" text="Drink Tea" textFill="WHITE">
+         <font>
+            <Font name="Berlin Sans FB" size="27.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="470.0" fitWidth="753.0" layoutX="74.0" layoutY="95.0" opacity="0.76" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/1515.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="picture" fitHeight="147.0" fitWidth="162.0" layoutX="386.0" layoutY="129.0" opacity="0.76" pickOnBounds="true" preserveRatio="true" />
+      <TextField fx:id="menu_textfield" layoutX="392.0" layoutY="306.0" prefHeight="26.0" prefWidth="135.0" />
+      <Label layoutX="320.0" layoutY="407.0" prefHeight="22.0" prefWidth="33.0" text="ราคา" textFill="#df6f1f">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="320.0" layoutY="360.0" prefHeight="22.0" prefWidth="51.0" text="Size" textFill="#df6f1f">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="315.0" layoutY="308.0" prefHeight="22.0" prefWidth="43.0" text="ชื่อเมนู" textFill="#df6f1f">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="size_textfield" layoutX="392.0" layoutY="358.0" prefHeight="26.0" prefWidth="135.0" />
+      <Button layoutX="427.0" layoutY="501.0" mnemonicParsing="false" onAction="#addAction" prefHeight="34.0" prefWidth="78.0" text="เพิ่ม" textFill="#df6f1f">
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="717.0" layoutY="501.0" mnemonicParsing="false" onAction="#backAction" prefHeight="34.0" prefWidth="78.0" text="ย้อนกลับ" textFill="#df6f1f">
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+      </Button>
+      <Label fx:id="menu_label" layoutX="551.0" layoutY="308.0" prefHeight="18.0" prefWidth="187.0" textFill="#df1a1a">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="size_label" layoutX="551.0" layoutY="360.0" prefHeight="18.0" prefWidth="187.0" textFill="#df1a1a">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="price_label" layoutX="551.0" layoutY="408.0" prefHeight="18.0" prefWidth="187.0" textFill="#df1a1a">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="price_textfield" layoutX="392.0" layoutY="405.0" prefHeight="26.0" prefWidth="135.0" />
+      <ImageView fx:id="picture" fitHeight="134.0" fitWidth="156.0" layoutX="382.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true" />
+      <DatePicker fx:id="date1" layoutX="278.0" layoutY="456.0" prefHeight="26.0" prefWidth="135.0" />
+      <DatePicker fx:id="date2" layoutX="566.0" layoutY="456.0" prefHeight="26.0" prefWidth="135.0" />
+      <Label layoutX="221.0" layoutY="458.0" prefHeight="22.0" prefWidth="43.0" text="วันผลิต" textFill="#df6f1f">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="492.0" layoutY="458.0" prefHeight="22.0" prefWidth="67.0" text="วันหมดอายุ" textFill="#df6f1f">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="date1_label" layoutX="432.0" layoutY="458.0" prefHeight="22.0" prefWidth="51.0" textFill="#df1a1a">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="date2_label" layoutX="717.0" layoutY="458.0" prefHeight="22.0" prefWidth="51.0" textFill="#df1a1a">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
