@@ -2,19 +2,26 @@ package Chop.Controller;
 
 import Chop.Manager.Checker;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.Optional;
 
 public class AddMenuController {
     @FXML ImageView picture;
-    private String picture_path;
     @FXML Label menu_label;
     @FXML Label price_label;
     @FXML Label size_label;
@@ -27,6 +34,37 @@ public class AddMenuController {
     @FXML DatePicker date2;
 
     Checker checker = new Checker();
+
+    @FXML Button addBtn;
+    @FXML ImageView image;
+    private String picture_path;
+
+    public void initialize() throws IOException {
+        addBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                FileChooser chooser = new FileChooser();
+                chooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+                chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("images PNG JPG", "*.png", "*.jpg"));
+                File file = chooser.showOpenDialog(addBtn.getScene().getWindow());
+                if (file != null) {
+                    try {
+                        File destDir = new File("images");
+                        destDir.mkdirs();
+                        String[] fileSplit = file.getName().split("\\.");
+                        String filename = file.getName();
+                        picture_path =  filename;
+                        Path target = FileSystems.getDefault().getPath(destDir.getAbsolutePath() + System.getProperty("file.separator") + filename);
+                        Files.copy(file.toPath(), target, StandardCopyOption.REPLACE_EXISTING);
+                        System.out.println(target.toUri().toString());
+                        image.setImage(new Image(target.toUri().toString()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
 
     @FXML public void addAction()  {
         String menu = menu_textfield.getText();
@@ -93,6 +131,8 @@ public class AddMenuController {
                 System.out.println("OK");
             }
         }
+
+        System.out.println(picture_path);
     }
 
     @FXML public void backAction(ActionEvent event) throws IOException {

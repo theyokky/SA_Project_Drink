@@ -8,7 +8,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.util.Optional;
 
@@ -26,6 +31,7 @@ public class AddStaffController {
     @FXML Label pass_label;
     @FXML Label passcon_label;
     Checker checker = new Checker();
+
 
     @FXML public void addAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
         String user = user_textfield.getText();

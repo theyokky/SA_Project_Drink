@@ -65,17 +65,17 @@
             <Font name="Berlin Sans FB" size="15.0" />
          </font>
       </Button>
-      <Label fx:id="name_label" layoutX="548.0" layoutY="173.0" prefHeight="18.0" prefWidth="187.0" textFill="#df1a1a">
+      <Label fx:id="name_label" layoutX="548.0" layoutY="173.0" prefHeight="22.0" prefWidth="238.0" textFill="#df1a1a">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lastname_label" layoutX="548.0" layoutY="217.0" prefHeight="18.0" prefWidth="187.0" textFill="#df1a1a">
+      <Label fx:id="lastname_label" layoutX="548.0" layoutY="217.0" prefHeight="22.0" prefWidth="238.0" textFill="#df1a1a">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label fx:id="user_label" layoutX="548.0" layoutY="265.0" prefHeight="18.0" prefWidth="187.0" textFill="#df1a1a">
+      <Label fx:id="user_label" layoutX="548.0" layoutY="265.0" prefHeight="22.0" prefWidth="238.0" textFill="#df1a1a">
          <font>
             <Font size="15.0" />
          </font>
@@ -96,7 +96,7 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <Label fx:id="tel_label" layoutX="548.0" layoutY="307.0" prefHeight="18.0" prefWidth="187.0" textFill="#df1a1a">
+      <Label fx:id="tel_label" layoutX="548.0" layoutY="307.0" prefHeight="22.0" prefWidth="238.0" textFill="#df1a1a">
          <font>
             <Font size="15.0" />
          </font>
