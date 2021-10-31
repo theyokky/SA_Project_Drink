@@ -1,6 +1,7 @@
 package Chop.Controller;
 
 import Chop.AccessDatabase.CustomerDataAccessor;
+import Chop.Model.Customer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,7 +12,18 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import kong.unirest.HttpResponse;
+import kong.unirest.JsonNode;
+import kong.unirest.ObjectMapper;
+import kong.unirest.Unirest;
+import kong.unirest.jackson.JacksonObjectMapper;
+import kong.unirest.json.JSONArray;
+import kong.unirest.json.JSONException;
+import kong.unirest.json.JSONObject;
+
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.function.Function;
 
 public class HomeController extends Application {
     @FXML TextField user_textfield;
@@ -41,9 +53,11 @@ public class HomeController extends Application {
 
         HomeCustomerController controller = loader.getController();
 
-        stage.setTitle("DrinkTea");
-        stage.setScene(scene);
-        stage.show();
+        if(!login("jack","jack").equals("")){
+            stage.setTitle("DrinkTea");
+            stage.setScene(scene);
+            stage.show();
+        }
 
     }
 
@@ -71,5 +85,39 @@ public class HomeController extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    //==========================================================================================
+    //Authenticate
+    public String login(String username, String password){
+        try {
+            return Unirest.post("http://systemanalasisapi.herokuapp.com/api/customer/login")
+                    .queryString("username",username)
+                    .queryString("password",password)
+                    .asJson().getBody().getObject().get("token").toString();
+        }catch (JSONException e){
+            return "";
+        }
+    }
+
+    public String register(String Cus_point, String Cus_right, String Cus_status,
+                           String name, String lastname, String username, String password,
+                           String tel
+    ){
+        try {
+            return Unirest.post("http://systemanalasisapi.herokuapp.com/api/customer/register")
+                    .queryString("Cus_point",Cus_point)
+                    .queryString("Cus_right",Cus_right)
+                    .queryString("Cus_status",Cus_status)
+                    .queryString("name",name)
+                    .queryString("lastname",lastname)
+                    .queryString("username",username)
+                    .queryString("password",password)
+                    .queryString("tel",tel)
+                    .asJson().getBody().getObject().get("token").toString();
+        }
+        catch (JSONException e){
+            return "";
+        }
     }
 }
