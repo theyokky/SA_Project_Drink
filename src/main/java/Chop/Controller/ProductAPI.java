@@ -3,6 +3,7 @@ package Chop.Controller;
 import Chop.Model.Product;
 import kong.unirest.Unirest;
 import kong.unirest.json.JSONArray;
+import kong.unirest.json.JSONException;
 import kong.unirest.json.JSONObject;
 
 import java.util.ArrayList;
@@ -32,8 +33,8 @@ public class ProductAPI {
                                      String make_date,
                                      String expiration_date,
                                      String p_img
-                                    ){
-        System.out.println(Unirest.post(
+                                    ) throws JSONException {
+        JSONObject obj = Unirest.post(
                 "http://systemanalasisapi.herokuapp.com/api/product/create")
                 .header("Authorization","bearer " + Auth.getInstance().getToken())
                 .queryString("P_name",name)
@@ -42,7 +43,9 @@ public class ProductAPI {
                 .queryString("P_makeDate",make_date)
                 .queryString("P_expirationDate",expiration_date)
                 .queryString("P_img", p_img)
-                .asJson().getBody()
+                .asJson().getBody().getObject();
+        Error.getInstance().setErrorJSON(obj);
+        System.out.println(obj.getString("msg")
         );
     }
 

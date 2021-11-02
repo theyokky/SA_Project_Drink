@@ -12,6 +12,8 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import kong.unirest.json.JSONException;
+import kong.unirest.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -78,10 +80,15 @@ public class AddMenuController {
         Object date2_ = date2.getValue();
         String date2_string = String.valueOf(date2_);
 
+        menu_label.setText("");
+        size_label.setText("");
+        price_label.setText("");
+        date1_label.setText("");
+        date2_label.setText("");
+
         int check = 5;
 
         if (!(menu.equals(""))) {
-            menu_label.setText("");
             check -= 1;
         }
         else {
@@ -89,7 +96,6 @@ public class AddMenuController {
         }
 
         if (!(size.equals(""))){
-            size_label.setText("");
             check -= 1;
         }
         else{
@@ -97,7 +103,6 @@ public class AddMenuController {
         }
 
         if (checker.checkPrice(price)) {
-            price_label.setText("");
             check -= 1;
         }
         else {
@@ -105,7 +110,6 @@ public class AddMenuController {
         }
 
         if (!(date1_string.equals("null"))){
-            date1_label.setText("");
             check -= 1;
         }
         else{
@@ -113,7 +117,6 @@ public class AddMenuController {
         }
 
         if (!(date2_string.equals("null"))){
-            date2_label.setText("");
             check -= 1;
         }
         else{
@@ -131,18 +134,34 @@ public class AddMenuController {
             alert.setTitle("DrinkTea");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
-                ProductAPI.createProduct(
-                        Integer.parseInt(price_textfield.getText()),
-                        menu_textfield.getText(),
-                        size_textfield.getText(),
-                        date1.getValue().format(
-                                DateTimeFormatter.ofPattern("yyyy/MM/dd")
-                        ),
-                        date2.getValue().format(
-                                DateTimeFormatter.ofPattern("yyyy/MM/dd")
-                        ),
-                        picture_path
-                );
+                try {
+                    ProductAPI.createProduct(
+                            Integer.parseInt(price_textfield.getText()),
+                            menu_textfield.getText(),
+                            size_textfield.getText(),
+                            date1.getValue().format(
+                                    DateTimeFormatter.ofPattern("yyyy/MM/dd")
+                            ),
+                            date2.getValue().format(
+                                    DateTimeFormatter.ofPattern("yyyy/MM/dd")
+                            ),
+                            picture_path
+                    );
+                }catch (JSONException e){
+                    JSONObject er =  Error.getInstance().getErrorJSON();
+                    if(!er.isNull("P_name"))
+                        menu_label.setText(er.getString("P_name"));
+                    if(!er.isNull("P_price"))
+                        price_label.setText(er.getString("P_price"));
+                    if(!er.isNull("P_size"))
+                        size_label.setText(er.getString("P_size"));
+                    if(!er.isNull("P_makeDate"))
+                        date1_label.setText(er.getString("P_makeDate"));
+                    if(!er.isNull("P_expirationDate"))
+                        date2_label.setText(er.getString("P_expirationDate"));
+                    if(!er.isNull("P_img"))
+                        menu_label.setText(er.getString("P_img"));
+                }
             }
         }
 

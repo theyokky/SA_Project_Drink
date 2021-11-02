@@ -7,6 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import kong.unirest.Unirest;
+import kong.unirest.json.JSONException;
+import kong.unirest.json.JSONObject;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -27,6 +30,15 @@ public class CustomerEditController {
     @FXML Label newpass_con_label;
     Checker checker = new Checker();
 
+    public void initialize()
+    {
+        Auth auth = Auth.getInstance();
+        JSONObject obj = auth.getUser();
+        user_textfield.setText(obj.getString("username"));
+        name_textfield.setText(obj.getString("name"));
+        phone_textfield.setText(obj.getString("tel"));
+    }
+
     @FXML public void editAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
         String user = user_textfield.getText();
         String name = name_textfield.getText();
@@ -34,10 +46,15 @@ public class CustomerEditController {
         String pass = newpass_passwordfield.getText();
         String con_pass = newpass_con_passwordfield.getText();
 
+        user_label.setText("");
+        name_label.setText("");
+        phone_label.setText("");
+        newpass_label.setText("");
+        newpass_con_label.setText("");
+
         int check = 5;
 
         if (checker.checkUserName(user)) {
-            user_label.setText("");
             check -= 1;
         }
         else {
@@ -45,7 +62,6 @@ public class CustomerEditController {
         }
 
         if (checker.checkAllName(name)){
-            name_label.setText("");
             check -= 1;
         }
         else{
@@ -53,7 +69,6 @@ public class CustomerEditController {
         }
 
         if (checker.checkPhoneNumber(phone)) {
-            phone_label.setText("");
             check -= 1;
         }
         else {
@@ -61,7 +76,6 @@ public class CustomerEditController {
         }
 
         if (checker.checkPassword(pass)){
-            newpass_label.setText("");
             check -= 1;
         }
         else{
@@ -69,7 +83,6 @@ public class CustomerEditController {
         }
 
         if (pass.equals(con_pass)){
-            newpass_con_label.setText("");
             check -= 1;
         }
         else{
@@ -86,7 +99,9 @@ public class CustomerEditController {
                             ButtonType.CANCEL);
             alert.setTitle("Happy Condo");
             Optional<ButtonType> result = alert.showAndWait();
-
+            if (result.get() == ButtonType.OK) {
+                editUser();
+            }
         }
 
     }
@@ -104,5 +119,39 @@ public class CustomerEditController {
         stage.setTitle("DrinkTea");
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void editUser(){
+        JSONObject obj = null;
+        try {
+            obj =  Unirest.post(
+                    "http://systemanalasisapi.herokuapp.com/api/user/edit/"
+                            +Auth.getInstance().getUser().getString("id"))
+                    .header("Authorization","bearer " + Auth.getInstance().getToken())
+                    .queryString("username",user_textfield.getText())
+                    .queryString("password",oldpass_passwordfield.getText())
+                    .queryString("new_password",newpass_passwordfield.getText())
+                    .queryString("c_password",newpass_con_passwordfield.getText())
+                    .queryString("name",name_textfield.getText())
+                    .queryString("lastname",name_textfield.getText())
+                    .queryString("tel",phone_textfield.getText())
+                    .asJson().getBody().getObject();
+            System.out.println(obj.get("token"));
+        }catch (JSONException e){
+            if(!obj.isNull("username"))
+                user_label.setText(obj.getString("username"));
+            if(!obj.isNull("password"))
+                oldpass_label.setText(obj.getString("password"));
+            if(!obj.isNull("new_password"))
+                newpass_label.setText(obj.getString("new_password"));
+            if(!obj.isNull("c_password"))
+                newpass_con_label.setText(obj.getString("c_password"));
+            if(!obj.isNull("name"))
+                name_label.setText(obj.getString("name"));
+            if(!obj.isNull("lastname"))
+                name_label.setText(obj.getString("lastname"));
+            if(!obj.isNull("tel"))
+                phone_label.setText(obj.getString("tel"));
+        }
     }
 }

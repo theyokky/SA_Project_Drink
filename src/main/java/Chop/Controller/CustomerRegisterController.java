@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import kong.unirest.Unirest;
 import kong.unirest.json.JSONException;
+import kong.unirest.json.JSONObject;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -116,17 +117,24 @@ public class CustomerRegisterController {
     public String register(String name, String lastname, String username, String password, String c_password,
                            String tel
     ){
+        JSONObject jsonObject = null;
         try {
-            return Unirest.post("http://systemanalasisapi.herokuapp.com/api/customer/register")
+            jsonObject =
+                    Unirest.post("http://systemanalasisapi.herokuapp.com/api/customer/register")
                     .queryString("name",name)
                     .queryString("lastname",lastname)
                     .queryString("username",username)
                     .queryString("password",password)
                     .queryString("c_password",c_password)
                     .queryString("tel",tel)
-                    .asJson().getBody().getObject().get("token").toString();
+                    .asJson().getBody().getObject();
+            return jsonObject.get("token").toString();
         }
         catch (JSONException e){
+            if(!jsonObject.isNull("username"))
+            user_label.setText(jsonObject.getJSONArray("username").getString(0));
+            if(!jsonObject.isNull("tel"))
+            phone_label.setText(jsonObject.getJSONArray("tel").getString(0));
             return "";
         }
     }

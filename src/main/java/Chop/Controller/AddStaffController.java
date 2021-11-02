@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import kong.unirest.json.JSONException;
+import kong.unirest.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -102,7 +104,30 @@ public class AddStaffController {
             alert.setTitle("DrinkTea");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
-                System.out.println("OK");
+                try {
+                    StaffAPI.createCashier(
+                            name_textfield.getText(),
+                            lastname_textfield.getText(),
+                            tel_textfield.getText(),
+                            user_textfield.getText(),
+                            pass_passwordfield.getText(),
+                            pass_con_passwordfield.getText()
+                    );
+                }catch (JSONException e){
+                    JSONObject er = Error.getInstance().getErrorJSON();
+                    if(!er.isNull("name"))
+                        name_label.setText(er.getString("name"));
+                    if(!er.isNull("lastname"))
+                        lastname_label.setText(er.getString("lastname"));
+                    if(!er.isNull("tel"))
+                        tel_label.setText(er.getString("tel"));
+                    if(!er.isNull("username"))
+                        user_label.setText(er.getString("username"));
+                    if(!er.isNull("password"))
+                        pass_label.setText(er.getString("password"));
+                    if(!er.isNull("c_password"))
+                        passcon_label.setText(er.getString("c_password"));
+                }
             }
         }
 

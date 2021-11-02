@@ -24,10 +24,9 @@ public class HomeAdminController {
     String[] s;
     private Staff selectStaff;
 
-    private final ObservableList<Staff> data =
+    private  ObservableList<Staff> data =
             FXCollections.observableArrayList(
-                    new Staff(00001, "Yanakorn", "Jarudejsiri", "0214589635", "yokky","password","staff"),
-                    new Staff(00002, "Pantat", "Semsomyat", "0632574125", "ponddy","password","staff")
+                    StaffAPI.getAllCashier()
             );
 
     public void initialize() {
@@ -66,7 +65,15 @@ public class HomeAdminController {
 
 
     @FXML public void deleteAction(ActionEvent event) throws IOException {
-
+        if(selectStaff != null){
+            StaffAPI.deletestaff(selectStaff);
+            data =
+                    FXCollections.observableArrayList(
+                            StaffAPI.getAllCashier()
+                    );
+            table.setItems(data);
+            table.refresh();
+        }
 
     }
 

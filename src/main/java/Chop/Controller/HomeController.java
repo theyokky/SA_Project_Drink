@@ -99,14 +99,13 @@ public class HomeController extends Application {
     //==========================================================================================
     //Authenticate
     public String login(String username, String password){
+        JSONObject obj = null;
         try {
-            JSONObject obj =  Unirest.post("http://systemanalasisapi.herokuapp.com/api/login")
+            obj =  Unirest.post("http://systemanalasisapi.herokuapp.com/api/login")
                     .queryString("username",username)
                     .queryString("password",password)
                     .asJson().getBody().getObject();
-            String token =
-                    !obj.isNull("token") ?
-                            obj.getString("token"): null;
+            String token = obj.getString("token");
             Auth auth = Auth.getInstance();
             auth.setToken(token);
             auth.setUser(
@@ -117,7 +116,8 @@ public class HomeController extends Application {
                     obj.getString("Staff_role"): "");
             return token;
         }catch (JSONException e){
-            return "";
+            user_label.setText(obj.getString("error"));
+            return null;
         }
     }
 }

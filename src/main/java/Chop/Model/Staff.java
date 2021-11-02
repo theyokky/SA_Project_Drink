@@ -10,7 +10,13 @@ public class Staff {
     private String role;
 
     public Staff() {}
-    public Staff(Integer id, String name, String lastname, String tel, String user,String pass,String role) {
+    public Staff(Integer id,
+                 String name,
+                 String lastname,
+                 String tel,
+                 String user,
+                 String pass,
+                 String role) {
         this.id = id;
         this.name = name;
         this.user = user;
