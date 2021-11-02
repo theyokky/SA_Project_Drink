@@ -29,7 +29,7 @@ public class CartController {
 
     private ObservableList<Order_list> data =
             FXCollections.observableArrayList(
-                    getAllProduct()
+                    Order.getInstance().getItems()
             );
 
     public void initialize() {
@@ -52,19 +52,13 @@ public class CartController {
     private void showSelectedItem(Order_list product){
         selected_product = product;
         menu_label.setText(product.getName());
-
-
-//        imageView.setImage(new Image(product.getImagePath()));
     }
 
     @FXML private void deleteAction(){
         if(selected_product != null){
-            System.out.println(Unirest.post("http://systemanalasisapi.herokuapp.com/api/order/list/delete/"
-                    + selected_product.getRelateOrderList())
-                    .header("Authorization","bearer " + Auth.getInstance().getToken())
-                    .asString().getBody());
+            Order.getInstance().removeProduct(selected_product);
             data = FXCollections.observableArrayList(
-                            getAllProduct()
+                    Order.getInstance().getItems()
                     );
             table.setItems(data);
             table.refresh();
@@ -74,12 +68,7 @@ public class CartController {
 
     @FXML private void payAction(){
         if(data.size() > 0){
-            System.out.println(Unirest.post(
-                    "http://systemanalasisapi.herokuapp.com/api/order/confirm/"
-                    + Auth.getInstance().getC_order_in())
-                    .header("Authorization","bearer " + Auth.getInstance().getToken())
-                    .asString().getBody());
-            Auth.getInstance().reset_c_order_in();
+            Order.getInstance().pay();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/HomeCustomer.fxml"));
             Scene scene = null;
@@ -110,40 +99,7 @@ public class CartController {
     }
 
     private void refreshPrice(){
-        price_label.setText("ราคารวม : " + Order_list.getTotalCostOfProducts(getAllProduct()));
-    }
-    //==============================================================================================
-    //Api get all product
-    private ArrayList<Order_list> getAllProduct(){
-        ArrayList<Order_list> products = new ArrayList<>();
-        System.out.println(Unirest.post("http://systemanalasisapi.herokuapp.com/api/order/basket")
-                .header("Authorization","bearer " + Auth.getInstance().getToken())
-                .queryString("o_id",Auth.getInstance().getC_order_in())
-                .queryString("cus_id",Auth.getInstance().getUser().getString("userable_id"))
-                .asString().getBody());
-        JsonNode productsJSON =
-                Unirest.post("http://systemanalasisapi.herokuapp.com/api/order/basket")
-                        .header("Authorization","bearer " + Auth.getInstance().getToken())
-                        .queryString("o_id",Auth.getInstance().getC_order_in())
-                        .queryString("cus_id",Auth.getInstance().getUser().getString("userable_id"))
-                        .asJson().getBody();
-        System.out.println(Auth.getInstance().getC_order_in());
-        System.out.println(Auth.getInstance().getUser().getString("userable_id"));
-        System.out.println(productsJSON);
-        for (int i=0;i<productsJSON.getArray().length();i++){
-            JSONObject productJSON = productsJSON.getArray().getJSONObject(i);
-            Order_list product = new Order_list(
-                    productJSON.getInt("product_id"),
-                    productJSON.getInt("P_price"),
-                    productJSON.getString("P_name"),
-                    productJSON.getString("P_size"),
-                    productJSON.getString("P_makeDate"),
-                    productJSON.getString("P_expirationDate")
-            );
-            product.setRelateOrderList(productJSON.getString("id"));
-            product.setQuantity(productJSON.getInt("quantity"));
-            products.add(product);
-        }
-        return products;
+        price_label.setText("ราคารวม : "
+                + Order_list.getTotalCostOfProducts(Order.getInstance().getItems()));
     }
 }

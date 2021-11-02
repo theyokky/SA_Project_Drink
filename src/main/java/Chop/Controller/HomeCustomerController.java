@@ -68,15 +68,9 @@ public class HomeCustomerController {
 
     @FXML public void addAction(ActionEvent event) throws IOException {
 
-        Auth auth = Auth.getInstance();
-        if(selectedProduct != null )
-            System.out.println(Unirest.post("http://systemanalasisapi.herokuapp.com/api/order/add")
-                    .header("Authorization","bearer " + auth.getToken())
-                    .queryString("O_id", auth.getC_order_in())
-                    .queryString("P_id", selectedProduct.getId())
-                    .queryString("quantity", int_spinner.getValue())
-                    .asJson().getBody().getArray());
-
+        if(selectedProduct != null ){
+            Order.getInstance().addProduct(selectedProduct, int_spinner.getValue());
+        }
     }
 
     @FXML public void accountAction(ActionEvent event) throws IOException {

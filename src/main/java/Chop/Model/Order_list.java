@@ -13,6 +13,15 @@ public class Order_list {
     private Integer quantity;
 
     public Order_list() {}
+    public Order_list(Product product, int quantity) {
+        this.id = product.getId();
+        this.price = product.getPrice();
+        this.name = product.getName();
+        this.size = product.getSize();
+        this.make_date = product.getMake_date();
+        this.expiration_date = product.getExpiration_date();
+        this.quantity = quantity;
+    }
     public Order_list(Integer id,
                    Integer price,
                    String name,
