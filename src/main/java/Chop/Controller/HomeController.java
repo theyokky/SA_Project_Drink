@@ -48,6 +48,7 @@ public class HomeController extends Application {
 
     @FXML public void loginAction(ActionEvent event) throws Exception{
 
+        System.out.println("OK");
 
         Button b = (Button) event.getSource();
         Stage stage = (Stage) b.getScene().getWindow();

@@ -63,6 +63,20 @@ public class HomeStaffController {
 
     }
 
+    @FXML public void accountAction(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/StaffEdit.fxml"));
+        Scene scene = new Scene(loader.load());
+
+        Button b = (Button) event.getSource();
+        Stage stage = (Stage) b.getScene().getWindow();
+
+        stage.setTitle("DrinkTea");
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
     @FXML public void editAction()  {
         if(selectedProduct != null){
             Product product = new Product(

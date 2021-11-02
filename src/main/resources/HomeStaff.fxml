@@ -76,5 +76,17 @@
             <Font name="Berlin Sans FB" size="15.0" />
          </font>
       </Button>
+      <Button layoutX="791.0" layoutY="13.0" mnemonicParsing="false" onAction="#accountAction" prefHeight="26.0" prefWidth="33.0">
+         <padding>
+            <Insets right="4.0" top="1.0" />
+         </padding>
+         <graphic>
+            <ImageView fitHeight="26.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/account-269-866236.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

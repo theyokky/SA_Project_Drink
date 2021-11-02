@@ -79,6 +79,20 @@ public class HomeCustomerController {
 
     }
 
+    @FXML public void accountAction(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/CustomerEdit.fxml"));
+        Scene scene = new Scene(loader.load());
+
+        Button b = (Button) event.getSource();
+        Stage stage = (Stage) b.getScene().getWindow();
+
+        stage.setTitle("DrinkTea");
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
     @FXML public void cartAction(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/Cart.fxml"));
