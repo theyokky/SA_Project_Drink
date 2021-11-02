@@ -2,6 +2,7 @@ package Chop.Controller;
 
 import Chop.AccessDatabase.CustomerDataAccessor;
 import Chop.Model.Customer;
+import Chop.Model.Product;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,8 +21,11 @@ import kong.unirest.jackson.JacksonObjectMapper;
 import kong.unirest.json.JSONArray;
 import kong.unirest.json.JSONException;
 import kong.unirest.json.JSONObject;
+import org.omg.CORBA.Object;
+import unirest.shaded.com.google.gson.JsonNull;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.function.Function;
 
@@ -44,16 +48,20 @@ public class HomeController extends Application {
 
     @FXML public void loginAction(ActionEvent event) throws Exception{
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/HomeCustomer.fxml"));
-        Scene scene = new Scene(loader.load());
 
         Button b = (Button) event.getSource();
         Stage stage = (Stage) b.getScene().getWindow();
 
-        HomeCustomerController controller = loader.getController();
-
-        if(!login("jack","jack").equals("")){
+        String token = login(user_textfield.getText(),pass_passwordfield.getText());
+        if(token != null){
+            FXMLLoader loader = new FXMLLoader();
+            Auth auth = Auth.getInstance();
+            if(auth.isAdmin())
+                loader.setLocation(getClass().getResource("/HomeAdmin.fxml"));
+            else if (auth.isCashier())
+                loader.setLocation(getClass().getResource("/HomeStaff.fxml"));
+            else loader.setLocation(getClass().getResource("/HomeCustomer.fxml"));
+            Scene scene = new Scene(loader.load());
             stage.setTitle("DrinkTea");
             stage.setScene(scene);
             stage.show();
@@ -117,32 +125,23 @@ public class HomeController extends Application {
     //Authenticate
     public String login(String username, String password){
         try {
-            return Unirest.post("http://systemanalasisapi.herokuapp.com/api/customer/login")
+            JSONObject obj =  Unirest.post("http://systemanalasisapi.herokuapp.com/api/login")
                     .queryString("username",username)
                     .queryString("password",password)
-                    .asJson().getBody().getObject().get("token").toString();
+                    .asJson().getBody().getObject();
+            String token =
+                    !obj.isNull("token") ?
+                            obj.getString("token"): null;
+            Auth auth = Auth.getInstance();
+            auth.setToken(token);
+            auth.setUser(
+                    !obj.isNull("user") ?
+                    obj.getJSONObject("user"): null);
+            auth.setRole(
+                    !obj.isNull("Staff_role") ?
+                    obj.getString("Staff_role"): "");
+            return token;
         }catch (JSONException e){
-            return "";
-        }
-    }
-
-    public String register(String Cus_point, String Cus_right, String Cus_status,
-                           String name, String lastname, String username, String password,
-                           String tel
-    ){
-        try {
-            return Unirest.post("http://systemanalasisapi.herokuapp.com/api/customer/register")
-                    .queryString("Cus_point",Cus_point)
-                    .queryString("Cus_right",Cus_right)
-                    .queryString("Cus_status",Cus_status)
-                    .queryString("name",name)
-                    .queryString("lastname",lastname)
-                    .queryString("username",username)
-                    .queryString("password",password)
-                    .queryString("tel",tel)
-                    .asJson().getBody().getObject().get("token").toString();
-        }
-        catch (JSONException e){
             return "";
         }
     }

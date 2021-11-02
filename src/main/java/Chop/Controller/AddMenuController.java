@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +19,8 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 public class AddMenuController {
@@ -128,7 +131,18 @@ public class AddMenuController {
             alert.setTitle("DrinkTea");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
-                System.out.println("OK");
+                ProductAPI.createProduct(
+                        Integer.parseInt(price_textfield.getText()),
+                        menu_textfield.getText(),
+                        size_textfield.getText(),
+                        date1.getValue().format(
+                                DateTimeFormatter.ofPattern("yyyy/MM/dd")
+                        ),
+                        date2.getValue().format(
+                                DateTimeFormatter.ofPattern("yyyy/MM/dd")
+                        ),
+                        picture_path
+                );
             }
         }
 

@@ -11,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import kong.unirest.Unirest;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -25,15 +27,13 @@ public class HomeCustomerController {
 
     private final ObservableList<Product> data =
             FXCollections.observableArrayList(
-                    new Product(00001, 50, "Original bubble tea", "S,M,L", "1/1/1", "2/2/2"),
-                    new Product(00002, 50, "Cocoa", "S,M,L,XL", "1/1/1", "2/2/2")
+                    getAllProduct()
             );
 
     public void initialize() {
         TableColumn menu = new TableColumn("Menu");
         menu.setCellValueFactory(
                 new PropertyValueFactory<Customer, String>("name"));
-
         table.setItems(data);
         table.getColumns().addAll(menu);
 
@@ -42,20 +42,24 @@ public class HomeCustomerController {
                 showSelectedItem((Product) newValue);
             }
         });
+
+        int_spinner.valueProperty().addListener((ob, ov, nv)-> {
+            price_label.setText("ราคารวม : " + (nv * selectedProduct.getPrice()));
+                });
     }
 
 
     private void showSelectedItem(Product product){
         size_combobox.getItems().clear();
         selectedProduct = product;
-        s = product.getSize().split(",");
+        s = Product.SIZE.split(",");
         // spinner
         SpinnerValueFactory<Integer> valueFactory =
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 40, 1);
         int_spinner.setValueFactory(valueFactory);
 
         menu_label.setText(product.getName());
-        price_label.setText("ราคารวม : " + 0);
+        price_label.setText("ราคารวม : " + selectedProduct.getPrice());
 
         size_combobox.getItems().addAll(s);
 
@@ -63,11 +67,15 @@ public class HomeCustomerController {
     }
 
     @FXML public void addAction(ActionEvent event) throws IOException {
-        Object size = size_combobox.getValue();
-        String size_string = String.valueOf(size);
 
-        System.out.println(int_spinner.getValue());
-        System.out.println(size_string);
+        Auth auth = Auth.getInstance();
+        if(selectedProduct != null )
+            System.out.println(Unirest.post("http://systemanalasisapi.herokuapp.com/api/order/add")
+                    .header("Authorization","bearer " + auth.getToken())
+                    .queryString("O_id", auth.getC_order_in())
+                    .queryString("P_id", selectedProduct.getId())
+                    .queryString("quantity", int_spinner.getValue())
+                    .asJson().getBody().getArray());
 
     }
 
@@ -97,4 +105,9 @@ public class HomeCustomerController {
         stage.show();
     }
 
+    //==============================================================================================
+    //Api get all product
+    private ArrayList<Product> getAllProduct(){
+        return ProductAPI.getAllProduct();
+    }
 }

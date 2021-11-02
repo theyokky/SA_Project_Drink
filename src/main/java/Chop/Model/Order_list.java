@@ -1,21 +1,19 @@
 package Chop.Model;
 
-import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
-
 import java.util.ArrayList;
 
-public class Product {
+public class Order_list {
     private Integer id;
     private Integer price;
     private String name;
     private String size;
     private String make_date;
     private String expiration_date;
+    private String relateOrderList;
+    private Integer quantity;
 
-    public static final String SIZE = "S,M,L";
-
-    public Product() {}
-    public Product(Integer id,
+    public Order_list() {}
+    public Order_list(Integer id,
                    Integer price,
                    String name,
                    String size,
@@ -47,6 +45,19 @@ public class Product {
     public String getExpiration_date() {
         return expiration_date;
     }
+    public String getRelateOrderList() {
+        return relateOrderList;
+    }
+    public Integer getQuantity() {
+        return quantity;
+    }
+    public static int getTotalCostOfProducts(ArrayList<Order_list> products){
+        int total = 0;
+        for (Order_list product : products) {
+            total += product.getPrice() * product.getQuantity();
+        }
+        return total;
+    }
 
     public void setExpiration_date(String expiration_date) {
         this.expiration_date = expiration_date;
@@ -65,5 +76,11 @@ public class Product {
     }
     public void setId(Integer id) {
         this.id = id;
+    }
+    public void setRelateOrderList(String relateOrderList) {
+        this.relateOrderList = relateOrderList;
+    }
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 }

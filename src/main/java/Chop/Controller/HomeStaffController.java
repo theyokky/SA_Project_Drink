@@ -13,16 +13,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class HomeStaffController {
     @FXML TableView table = new TableView();
     @FXML Label menu_label;
     @FXML TextField price_textfield;
+    private Product selectedProduct = null;
 
-    private final ObservableList<Product> data =
+    private ObservableList<Product> data =
             FXCollections.observableArrayList(
-                    new Product(00001, 50, "Original bubble tea", "S,M,L", "1/1/1", "2/2/2"),
-                    new Product(00002, 50, "Cocoa", "S,M,L,XL", "1/1/1", "2/2/2")
+                    getAllProduct()
             );
 
     public void initialize() {
@@ -41,7 +42,8 @@ public class HomeStaffController {
     }
 
     private void showSelectedItem(Product product){
-
+        selectedProduct = product;
+        price_textfield.setText(product.getPrice()+"");
         menu_label.setText(product.getName());
 
 //        imageView.setImage(new Image(product.getImagePath()));
@@ -62,12 +64,34 @@ public class HomeStaffController {
     }
 
     @FXML public void editAction()  {
-
+        if(selectedProduct != null){
+            Product product = new Product(
+                    selectedProduct.getId(),
+                    Integer.parseInt(price_textfield.getText()),
+                    selectedProduct.getName(),
+                    selectedProduct.getSize(),
+                    selectedProduct.getMake_date(),
+                    selectedProduct.getExpiration_date()
+            );
+            ProductAPI.editProduct(product);
+            data = FXCollections.observableArrayList(
+                            getAllProduct()
+                    );
+            table.setItems(data);
+            table.refresh();
+        }
 
     }
 
     @FXML public void deleteAction()  {
-
+        if(selectedProduct != null){
+            ProductAPI.deleteProduct(selectedProduct);
+            data = FXCollections.observableArrayList(
+                    getAllProduct()
+            );
+            table.setItems(data);
+            table.refresh();
+        }
 
     }
 
@@ -82,5 +106,11 @@ public class HomeStaffController {
         stage.setTitle("DrinkTea");
         stage.setScene(scene);
         stage.show();
+    }
+
+    //==============================================================================================
+    //Api get all product
+    private ArrayList<Product> getAllProduct(){
+        return ProductAPI.getAllProduct();
     }
 }

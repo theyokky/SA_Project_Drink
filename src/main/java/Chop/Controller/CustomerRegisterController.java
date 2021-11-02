@@ -7,6 +7,8 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import kong.unirest.Unirest;
+import kong.unirest.json.JSONException;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -86,11 +88,13 @@ public class CustomerRegisterController {
             alert.setTitle("Happy Condo");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
-                System.out.println("OK");
+                register(
+                    name_textfield.getText(), name_textfield.getText(), user_textfield.getText()
+                        ,pass_passwordfield.getText(),pass_con_passwordfield.getText()
+                        ,phone_textfield.getText()
+                );
             }
         }
-
-
 
     }
 
@@ -107,6 +111,24 @@ public class CustomerRegisterController {
         stage.setTitle("DrinkTea");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public String register(String name, String lastname, String username, String password, String c_password,
+                           String tel
+    ){
+        try {
+            return Unirest.post("http://systemanalasisapi.herokuapp.com/api/customer/register")
+                    .queryString("name",name)
+                    .queryString("lastname",lastname)
+                    .queryString("username",username)
+                    .queryString("password",password)
+                    .queryString("c_password",c_password)
+                    .queryString("tel",tel)
+                    .asJson().getBody().getObject().get("token").toString();
+        }
+        catch (JSONException e){
+            return "";
+        }
     }
 
 }
