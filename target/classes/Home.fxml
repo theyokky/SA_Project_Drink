@@ -73,15 +73,5 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button layoutX="445.0" layoutY="421.0" mnemonicParsing="false" onAction="#staffAction" prefHeight="33.0" prefWidth="70.0" text="Staff" textFill="#ff9341">
-         <font>
-            <Font name="Berlin Sans FB" size="15.0" />
-         </font>
-      </Button>
-      <Button layoutX="544.0" layoutY="421.0" mnemonicParsing="false" onAction="#adminAction" prefHeight="33.0" prefWidth="70.0" text="Admin" textFill="#ff9341">
-         <font>
-            <Font name="Berlin Sans FB" size="15.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>

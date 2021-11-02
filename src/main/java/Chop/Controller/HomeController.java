@@ -90,32 +90,6 @@ public class HomeController extends Application {
         stage.show();
     }
 
-    @FXML public void staffAction(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/HomeStaff.fxml"));
-        Scene scene = new Scene(loader.load());
-
-        Button b = (Button) event.getSource();
-        Stage stage = (Stage) b.getScene().getWindow();
-
-        stage.setTitle("DrinkTea");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML public void adminAction(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/HomeAdmin.fxml"));
-        Scene scene = new Scene(loader.load());
-
-        Button b = (Button) event.getSource();
-        Stage stage = (Stage) b.getScene().getWindow();
-
-        stage.setTitle("DrinkTea");
-        stage.setScene(scene);
-        stage.show();
-    }
-
 
     public static void main(String[] args) {
         launch(args);
