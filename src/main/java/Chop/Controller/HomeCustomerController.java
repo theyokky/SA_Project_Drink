@@ -20,8 +20,8 @@ public class HomeCustomerController {
     @FXML TableView table = new TableView();
     @FXML Label menu_label;
     @FXML Label price_label;
+    @FXML Label size_label;
     @FXML Spinner<Integer> int_spinner;
-    @FXML ComboBox size_combobox;
     String[] s;
     private Product selectedProduct;
 
@@ -33,7 +33,8 @@ public class HomeCustomerController {
     public void initialize() {
         TableColumn menu = new TableColumn("Menu");
         menu.setCellValueFactory(
-                new PropertyValueFactory<Customer, String>("name"));
+                new PropertyValueFactory<Product, String>("name"));
+
         table.setItems(data);
         table.getColumns().addAll(menu);
 
@@ -50,7 +51,6 @@ public class HomeCustomerController {
 
 
     private void showSelectedItem(Product product){
-        size_combobox.getItems().clear();
         selectedProduct = product;
         s = Product.SIZE.split(",");
         // spinner
@@ -59,9 +59,8 @@ public class HomeCustomerController {
         int_spinner.setValueFactory(valueFactory);
 
         menu_label.setText(product.getName());
-        price_label.setText("ราคารวม : " + selectedProduct.getPrice());
-
-        size_combobox.getItems().addAll(s);
+        price_label.setText("ราคา : " + selectedProduct.getPrice());
+        size_label.setText("Size : " + selectedProduct.getSize());
 
 //        imageView.setImage(new Image(product.getImagePath()));
     }

@@ -40,7 +40,7 @@
             <Font name="Berlin Sans FB" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="price_label" layoutX="674.0" layoutY="387.0" prefHeight="34.0" prefWidth="152.0" textFill="#332113">
+      <Label fx:id="price_label" layoutX="670.0" layoutY="331.0" prefHeight="34.0" prefWidth="152.0" textFill="#332113">
          <font>
             <Font name="Berlin Sans FB" size="20.0" />
          </font>
@@ -50,7 +50,7 @@
             <Font name="Berlin Sans FB" size="15.0" />
          </font>
       </Button>
-      <Button layoutX="619.0" layoutY="336.0" mnemonicParsing="false" onAction="#deleteAction" prefHeight="33.0" prefWidth="102.0" text="ลบสินค้าออก" textFill="#df6f1f">
+      <Button layoutX="719.0" layoutY="387.0" mnemonicParsing="false" onAction="#deleteAction" prefHeight="33.0" prefWidth="102.0" text="ลบสินค้าออก" textFill="#df6f1f">
          <font>
             <Font name="Berlin Sans FB" size="15.0" />
          </font>
@@ -61,5 +61,10 @@
          </font>
       </Button>
       <TableView fx:id="table" layoutX="33.0" layoutY="88.0" prefHeight="454.0" prefWidth="403.0" />
+      <Label fx:id="size_label" layoutX="508.0" layoutY="331.0" prefHeight="34.0" prefWidth="152.0">
+         <font>
+            <Font name="Berlin Sans FB" size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

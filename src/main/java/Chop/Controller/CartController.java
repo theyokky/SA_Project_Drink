@@ -24,6 +24,7 @@ public class CartController {
     @FXML TableView table = new TableView();
     @FXML Label menu_label;
     @FXML Label price_label;
+    @FXML Label size_label;
     
     private Order_list selected_product = null;
 
@@ -52,6 +53,7 @@ public class CartController {
     private void showSelectedItem(Order_list product){
         selected_product = product;
         menu_label.setText(product.getName());
+        size_label.setText("Size : " + product.getSize());
     }
 
     @FXML private void deleteAction(){

@@ -1,8 +1,5 @@
 package Chop.Controller;
 
-import Chop.AccessDatabase.CustomerDataAccessor;
-import Chop.Model.Customer;
-import Chop.Model.Product;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,28 +10,16 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import kong.unirest.HttpResponse;
-import kong.unirest.JsonNode;
-import kong.unirest.ObjectMapper;
 import kong.unirest.Unirest;
-import kong.unirest.jackson.JacksonObjectMapper;
-import kong.unirest.json.JSONArray;
 import kong.unirest.json.JSONException;
 import kong.unirest.json.JSONObject;
-import org.omg.CORBA.Object;
-import unirest.shaded.com.google.gson.JsonNull;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.function.Function;
 
 public class HomeController extends Application {
     @FXML TextField user_textfield;
     @FXML PasswordField pass_passwordfield;
     @FXML Label user_label;
-
-    private CustomerDataAccessor dataAccessor ;
 
     @Override public void start(Stage primaryStage) throws Exception{
         FXMLLoader loader = new FXMLLoader();
@@ -74,13 +59,6 @@ public class HomeController extends Application {
         }
     }
 
-
-    @Override
-    public void stop() throws Exception {
-        if (dataAccessor != null) {
-            dataAccessor.shutdown();
-        }
-    }
 
     @FXML public void registerAction(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
