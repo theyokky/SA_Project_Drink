@@ -35,7 +35,7 @@ public class AddStaffController {
     Checker checker = new Checker();
 
 
-    @FXML public void addAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+    @FXML public void addAction(ActionEvent event) {
         String user = user_textfield.getText();
         String name = name_textfield.getText();
         String lastname = name_textfield.getText();
@@ -113,6 +113,8 @@ public class AddStaffController {
                             pass_passwordfield.getText(),
                             pass_con_passwordfield.getText()
                     );
+                    toPage((Stage) name_textfield.getScene().getWindow()
+                            , "/HomeAdmin.fxml");
                 }catch (JSONException e){
                     JSONObject er = Error.getInstance().getErrorJSON();
                     if(!er.isNull("name"))
@@ -127,6 +129,9 @@ public class AddStaffController {
                         pass_label.setText(er.getString("password"));
                     if(!er.isNull("c_password"))
                         passcon_label.setText(er.getString("c_password"));
+                    System.out.println(e);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -134,12 +139,16 @@ public class AddStaffController {
     }
 
     @FXML public void backAction(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/HomeAdmin.fxml"));
-        Scene scene = new Scene(loader.load());
-
         Button b = (Button) event.getSource();
         Stage stage = (Stage) b.getScene().getWindow();
+        toPage(stage, "/HomeAdmin.fxml");
+    }
+
+
+    private void toPage(Stage stage, String page) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(page));
+        Scene scene = new Scene(loader.load());
 
         stage.setTitle("DrinkTea");
         stage.setScene(scene);

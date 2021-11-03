@@ -50,7 +50,7 @@ public class StaffAPI {
                 .queryString("tel",tel)
                 .asJson().getBody().getObject();
         Error.getInstance().setErrorJSON(obj);
-        System.out.println(obj.getString("msg"));
+        System.out.println(obj.getString("token"));
     }
 
     public static void deletestaff(Staff staff){

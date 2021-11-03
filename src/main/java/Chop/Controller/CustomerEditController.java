@@ -109,16 +109,11 @@ public class CustomerEditController {
 
 
     @FXML public void backAction(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/HomeCustomer.fxml"));
-        Scene scene = new Scene(loader.load());
 
         Button b = (Button) event.getSource();
         Stage stage = (Stage) b.getScene().getWindow();
 
-        stage.setTitle("DrinkTea");
-        stage.setScene(scene);
-        stage.show();
+        toPage(stage, "/HomeCustomer.fxml");
     }
 
     private void editUser(){
@@ -137,6 +132,8 @@ public class CustomerEditController {
                     .queryString("tel",phone_textfield.getText())
                     .asJson().getBody().getObject();
             System.out.println(obj.get("token"));
+            toPage((Stage) user_textfield.getScene().getWindow()
+                    , "/HomeCustomer.fxml");
         }catch (JSONException e){
             if(!obj.isNull("username"))
                 user_label.setText(obj.getString("username"));
@@ -152,6 +149,18 @@ public class CustomerEditController {
                 name_label.setText(obj.getString("lastname"));
             if(!obj.isNull("tel"))
                 phone_label.setText(obj.getString("tel"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
+
+    private void toPage(Stage stage, String page) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(page));
+        Scene scene = new Scene(loader.load());
+
+        stage.setTitle("DrinkTea");
+        stage.setScene(scene);
+        stage.show();
     }
 }

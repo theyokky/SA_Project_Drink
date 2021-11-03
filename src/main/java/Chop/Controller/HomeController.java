@@ -53,6 +53,8 @@ public class HomeController extends Application {
         Button b = (Button) event.getSource();
         Stage stage = (Stage) b.getScene().getWindow();
 
+        user_label.setText("");
+
         String token = login(user_textfield.getText(),pass_passwordfield.getText());
         if(token != null){
             FXMLLoader loader = new FXMLLoader();
@@ -67,7 +69,9 @@ public class HomeController extends Application {
             stage.setScene(scene);
             stage.show();
         }
-
+        else {
+            pass_passwordfield.setText("");
+        }
     }
 
 

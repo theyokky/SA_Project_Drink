@@ -102,19 +102,22 @@ public class CustomerRegisterController {
 
 
     @FXML public void backAction(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/Home.fxml"));
-        Scene scene = new Scene(loader.load());
-
         Button b = (Button) event.getSource();
         Stage stage = (Stage) b.getScene().getWindow();
+        toPage(stage, "/Home.fxml");
+    }
+
+    private void toPage(Stage stage, String page) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(page));
+        Scene scene = new Scene(loader.load());
 
         stage.setTitle("DrinkTea");
         stage.setScene(scene);
         stage.show();
     }
 
-    public String register(String name, String lastname, String username, String password, String c_password,
+    public void register(String name, String lastname, String username, String password, String c_password,
                            String tel
     ){
         JSONObject jsonObject = null;
@@ -128,14 +131,40 @@ public class CustomerRegisterController {
                     .queryString("c_password",c_password)
                     .queryString("tel",tel)
                     .asJson().getBody().getObject();
-            return jsonObject.get("token").toString();
+
+            jsonObject.get("token").toString();
+            login(user_textfield.getText(), pass_passwordfield.getText());
+            Stage stage = (Stage) name_textfield.getScene().getWindow();
+            toPage(stage, "/HomeCustomer.fxml");
         }
-        catch (JSONException e){
+        catch (JSONException | IOException e){
             if(!jsonObject.isNull("username"))
             user_label.setText(jsonObject.getJSONArray("username").getString(0));
             if(!jsonObject.isNull("tel"))
             phone_label.setText(jsonObject.getJSONArray("tel").getString(0));
-            return "";
+        }
+    }
+
+    public String login(String username, String password){
+        JSONObject obj = null;
+        try {
+            obj =  Unirest.post("http://systemanalasisapi.herokuapp.com/api/login")
+                    .queryString("username",username)
+                    .queryString("password",password)
+                    .asJson().getBody().getObject();
+            String token = obj.getString("token");
+            Auth auth = Auth.getInstance();
+            auth.setToken(token);
+            auth.setUser(
+                    !obj.isNull("user") ?
+                            obj.getJSONObject("user"): null);
+            auth.setRole(
+                    !obj.isNull("Staff_role") ?
+                            obj.getString("Staff_role"): "");
+            return token;
+        }catch (JSONException e){
+            user_label.setText(obj.getString("error"));
+            return null;
         }
     }
 

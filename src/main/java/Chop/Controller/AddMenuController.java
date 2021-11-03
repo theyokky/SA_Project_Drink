@@ -147,6 +147,8 @@ public class AddMenuController {
                             ),
                             picture_path
                     );
+                    toPage((Stage) menu_textfield.getScene().getWindow()
+                            , "/HomeStaff.fxml");
                 }catch (JSONException e){
                     JSONObject er =  Error.getInstance().getErrorJSON();
                     if(!er.isNull("P_name"))
@@ -161,6 +163,9 @@ public class AddMenuController {
                         date2_label.setText(er.getString("P_expirationDate"));
                     if(!er.isNull("P_img"))
                         menu_label.setText(er.getString("P_img"));
+                    System.out.println(e);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -169,12 +174,16 @@ public class AddMenuController {
     }
 
     @FXML public void backAction(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/HomeStaff.fxml"));
-        Scene scene = new Scene(loader.load());
 
         Button b = (Button) event.getSource();
         Stage stage = (Stage) b.getScene().getWindow();
+        toPage(stage, "/HomeStaff.fxml");
+    }
+
+    private void toPage(Stage stage, String page) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(page));
+        Scene scene = new Scene(loader.load());
 
         stage.setTitle("DrinkTea");
         stage.setScene(scene);
